@@ -29,6 +29,8 @@ const reducer = (state = initialState, action) => {
                ? { ...anecdote, votes: anecdote.votes + 1 }
                : anecdote
          )
+      case 'NEW':
+         return [...state, asObject(action.payload)]
    }
 
    return state
