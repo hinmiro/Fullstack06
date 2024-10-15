@@ -8,7 +8,7 @@ const filterReducer = (state = '', action) => {
 
 export const filterText = (content) => {
    return {
-      type: 'SET_FILTER',
+      type: 'SET_ FILTER',
       payload: content,
    }
 }
