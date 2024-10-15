@@ -12,6 +12,17 @@ const AnecdoteList = () => {
 
    const vote = (id) => {
       dispatch({ type: 'anecdotes/vote', payload: id })
+      const votedAnecdote = anecdotes.find((anecdote) => anecdote.id === id)
+      dispatch({
+         type: 'notifications/setNotification',
+         payload: `Voted anecdote: ${votedAnecdote.content}`,
+      })
+      setTimeout(() => {
+         dispatch({
+            type: 'notifications/removeNotification',
+            payload: null,
+         })
+      }, 5000)
    }
 
    return (
