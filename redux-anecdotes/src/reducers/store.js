@@ -31,7 +31,7 @@ const filterSlice = createSlice({
 
 const anecdoteSlice = createSlice({
    name: 'anecdotes',
-   initialState: anecdotesAtStart.map(asObject),
+   initialState: [],
    reducers: {
       createAnecdote(state, action) {
          state.push({
@@ -50,6 +50,9 @@ const anecdoteSlice = createSlice({
          return state.map((anecdote) =>
             anecdote.id !== id ? anecdote : updatedAnecdote
          )
+      },
+      setAnecdotes(state, action) {
+         return action.payload
       },
    },
 })
@@ -76,7 +79,7 @@ const store = configureStore({
 })
 
 export const { filterReducer } = filterSlice.actions
-export const { createAnecdote, vote } = anecdoteSlice.actions
+export const { createAnecdote, vote, setAnecdotes } = anecdoteSlice.actions
 export const { setNotification, removeNotification } = notificationSlice.actions
 
 export default store
