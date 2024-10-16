@@ -1,5 +1,5 @@
 {
-  "anecdotes":[
+  "anecdotes": [
     {
       "content": "If it hurts, do it more often",
       "id": "47145",
@@ -33,6 +33,16 @@
     {
       "content": "Redux is like magic O.o",
       "id": "78723",
+      "votes": 0
+    },
+    {
+      "id": "afca",
+      "content": "Redux states are kinda neat!",
+      "votes": 0
+    },
+    {
+      "id": "2778",
+      "content": "Dont forget awaits ^^",
       "votes": 0
     }
   ]
