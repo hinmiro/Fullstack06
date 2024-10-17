@@ -1,14 +1,7 @@
+import anecdoteService from '../services/anecdote'
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
 const getId = () => (100000 * Math.random()).toFixed(0)
-
-const asObject = (anecdote) => {
-   return {
-      content: anecdote,
-      id: getId(),
-      votes: 0,
-   }
-}
 
 const filterSlice = createSlice({
    name: 'set_filter',
@@ -68,5 +61,12 @@ const store = configureStore({
 export const { filterReducer } = filterSlice.actions
 export const { createAnecdote, vote, setAnecdotes } = anecdoteSlice.actions
 export const { setNotification, removeNotification } = notificationSlice.actions
+
+export const initializeAnecdotes = () => {
+   return async (dispatch) => {
+      const anecdotes = await anecdoteService.getAll()
+      dispatch({ type: 'anecdotes/setAnecdotes', payload: anecdotes })
+   }
+}
 
 export default store
