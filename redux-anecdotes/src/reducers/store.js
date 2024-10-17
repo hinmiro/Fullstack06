@@ -77,4 +77,13 @@ export const voteAnecdote = (anecdote) => {
    }
 }
 
+export const showNotification = (text, time) => {
+   return (dispatch) => {
+      dispatch({ type: 'notifications/setNotification', payload: text })
+      setTimeout(() => {
+         dispatch({ type: 'notifications/setNotification', payload: null })
+      }, time * 1000)
+   }
+}
+
 export default store
