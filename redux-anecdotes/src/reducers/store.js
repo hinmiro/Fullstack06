@@ -1,8 +1,6 @@
 import anecdoteService from '../services/anecdote'
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
-const getId = () => (100000 * Math.random()).toFixed(0)
-
 const filterSlice = createSlice({
    name: 'set_filter',
    initialState: '',
@@ -21,14 +19,9 @@ const anecdoteSlice = createSlice({
          state.push(action.payload)
       },
       vote(state, action) {
-         const id = action.payload
-         const votedAnecdote = state.find((a) => a.id === id)
-         const updatedAnecdote = {
-            ...votedAnecdote,
-            votes: votedAnecdote.votes + 1,
-         }
+         const updatedAnecdote = action.payload
          return state.map((anecdote) =>
-            anecdote.id !== id ? anecdote : updatedAnecdote
+            anecdote.id !== updatedAnecdote.id ? anecdote : updatedAnecdote
          )
       },
       setAnecdotes(state, action) {
@@ -73,6 +66,14 @@ export const createNewAnecdote = (content) => {
    return async (dispatch) => {
       const anecdote = await anecdoteService.createNew(content)
       dispatch({ type: 'anecdotes/createAnecdote', payload: anecdote })
+   }
+}
+
+export const voteAnecdote = (anecdote) => {
+   return async (dispatch) => {
+      const updatedAnecdote = { ...anecdote, votes: anecdote.votes + 1 }
+      const anecdoteFromDb = await anecdoteService.voteAnecdote(updatedAnecdote)
+      dispatch({ type: 'anecdotes/vote', payload: anecdoteFromDb })
    }
 }
 
